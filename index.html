@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title> ~ </title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="accent" id="top"></div>
+    <div class="weather" id="weathercontainer">
+        <div id="weather-info">
+            <span id="weather-icon"></span> <span id="weather-temp">locating...</span>
+        </div>
+        <div id="weather-desc"></div>
+        <div id="location-input-container" style="display: none;">
+            > <input type="text" id="location-input" placeholder="enter city..." autocomplete="off">
+        </div>
+    </div>
+    <div class="time" id="datecontainer">
+            <div id="date"></div>
+            <div id="time"></div>
+    </div>
+    <div class="containerwrapper">
+        <div class="container">
+            <div class="container-top"></div>
+
+            <div class="container-middle">
+                <!-- TAB 1 -->
+                <div class="main" id="main1">
+                    <div class="section">
+                        <a href="https://www.youtube.com">youtube</a>
+                        <a href="https://kick.com/">kick</a>
+                        <a href="https://boards.4chan.org/v/">/v/</a>
+                        <a href="https://gemini.google.com/app?hl=en-GB">gemini</a>
+                        <a href="https://chatgpt.com/">chatgpt</a>
+                        <a href="https://gg.deals/">ggdeals</a>
+                    </div>
+                    <div class="section">
+                        <a href="https://mail.google.com/mail/u/0/#inbox">gmail</a>
+                        <a href="https://www.pixiv.net/en/">pixiv</a>
+                        <a href="https://lichess.org/">chess</a>
+                        <a href="https://www.roblox.com/home">roblox</a>
+                    </div>
+                    <div class="section">
+                    </div>
+                </div>
+
+                <!-- TAB 2 -->
+                <div class="main" id="main2">
+                <iframe 
+                    id="player" 
+                    src="https://www.youtube.com/embed/JePLWGD2uW8" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen>
+                </iframe>
+                </div>
+
+                <!-- TAB 3 -->
+                <div class="main" id="main3" style="justify-content:center; align-items: center; text-align: center;">
+                        this is a placeholder page. <br />
+                        please don't think too much about it.
+                </div>
+
+                <!-- SIDEBAR -->
+                <div class="sidebar" id="waifupic"></div>
+            </div>
+
+            <div class="container-bottom">
+                <div class="button" id="button1"></div>
+                <div class="button" id="button2"></div>
+                <div class="button" id="button3"></div>
+                <div class="search">
+                    <form action="https://google.com/search" target="_blank">
+                        <input name="q" placeholder="search...">
+                    </form>
+                </div>
+                <div class="quote" id="waifuname"></div>
+            </div>
+        </div>
+        
+        <div class="accent" id="division"></div>
+
+        <div class="notes" id="notes">
+            <div class="notecreation">
+                <span class="newnote" id="newnote" onclick="toggleForm()">new note...</span>
+                <div id="formwrapper" style="display: none;">
+                    <textarea id="notetaker" placeholder="note..." onkeydown="autoGrow(this)"></textarea>
+                    <button class="notebutton" onclick="newNote()">Submit</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/waifus.js"></script>
+    <script src="js/time.js"></script>
+    <script src="js/buttons.js"></script>
+    <script src="js/notes.js"></script>
+    <script src="js/weather.js"></script>
+</body>
+</html>
