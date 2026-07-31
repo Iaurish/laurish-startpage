@@ -48,7 +48,7 @@ body {
     background-size: cover; 
     background-position: center center; 
     background-repeat: no-repeat; 
-    background-attachment: fixed; 
+    background-attachment: fixed;
 }
 
 input:focus, textarea:focus {
@@ -233,9 +233,8 @@ form, input {
     cursor: pointer;
 
     /*hopefully this fixes image issues in chromium based browsers*/
-    image-rendering: auto;
-    transform: translateZ(0);
-    backface-visibility: hidden;
+    image-rendering: -webkit-optimize-contrast; 
+    image-rendering: high-quality;
 }
 
 .section {
