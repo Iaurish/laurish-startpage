@@ -231,6 +231,11 @@ form, input {
     background-size: cover;
     background-color: #c4c4c4;
     cursor: pointer;
+
+    /*hopefully this fixes image issues in chromium based browsers*/
+    image-rendering: auto;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .section {
