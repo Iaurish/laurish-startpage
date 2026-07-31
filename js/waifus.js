@@ -6,15 +6,25 @@ var Waifus = {
         "sakuya izayoi",
         "monika",      
         "aubrey",
-        "remilia and flandre",
-        "jill stingray"
+        "remilia and flandre scarlet",
+        "jill stingray",
+        "asuka langley soryu",
+        "patchouli knowledge",
+        "hatsune miku",
+        "megumin and kazuma",
+        "ruka sarashina"
     ],
     file:[
         "1.png",
         "2.png",
         "3.jpg",
         "4.png",
-        "5.jpg"
+        "5.jpg",
+        "6.jpg",
+        "7.jpg",
+        "8.jpg",
+        "9.jpg",
+        "10.jpg"
     ],
     numWaifus:undefined,
     curWaifu:undefined,
