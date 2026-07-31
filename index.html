@@ -9,10 +9,13 @@
 <body>
     <div class="accent" id="top"></div>
     <div class="weather" id="weathercontainer">
-        <div id="weather-info">
-            <span id="weather-icon"></span> <span id="weather-temp">locating...</span>
+        <div id="weather-display" onclick="promptManualLocation()" title="locating...">
+            <div id="weather-info">
+                <span id="weather-icon"></span> <span id="weather-temp">locating...</span>
+            </div>
+            <div id="weather-desc"></div>
         </div>
-        <div id="weather-desc"></div>
+        
         <div id="location-input-container" style="display: none;">
             > <input type="text" id="location-input" placeholder="enter city..." autocomplete="off">
         </div>
@@ -28,23 +31,33 @@
             <div class="container-middle">
                 <!-- TAB 1 -->
                 <div class="main" id="main1">
-                    <div class="section">
-                        <a href="https://www.youtube.com">youtube</a>
-                        <a href="https://kick.com/">kick</a>
-                        <a href="https://boards.4chan.org/v/">/v/</a>
-                        <a href="https://gemini.google.com/app?hl=en-GB">gemini</a>
-                        <a href="https://chatgpt.com/">chatgpt</a>
-                        <a href="https://gg.deals/">ggdeals</a>
+                    <div class="section" id="link-col-1"></div>
+                    <div class="section" id="link-col-2"></div>
+                    <div class="section" id="link-col-3"></div>
+
+                    <div id="edit-btn-zone">
+                        <span id="edit-links-btn" onclick="toggleLinkMenu()">edit</span>
                     </div>
-                    <div class="section">
-                        <a href="https://mail.google.com/mail/u/0/#inbox">gmail</a>
-                        <a href="https://www.pixiv.net/en/">pixiv</a>
-                        <a href="https://lichess.org/">chess</a>
-                        <a href="https://www.roblox.com/home">roblox</a>
-                    </div>
-                    <div class="section">
-                        <a href="https://github.com/">github</a>
-                        <a href="https://dash.cloudflare.com/">cloudflare</a>
+
+                    <div id="link-menu" style="display: none;">
+                        <div style="margin-bottom: 15px; font-weight: bold;">> add new link</div>
+                        
+                        <input type="text" id="new-link-name" placeholder="name (e.g. youtube)" autocomplete="off">
+                        <input type="text" id="new-link-url" placeholder="url (e.g. youtube.com)" autocomplete="off">
+                        
+                        <select id="new-link-col">
+                            <option value="1">column 1</option>
+                            <option value="2">column 2</option>
+                            <option value="3">column 3</option>
+                        </select>
+                        
+                        <div style="margin-top: 15px; display: flex; gap: 10px;">
+                            <button class="notebutton" onclick="saveNewLink()" style="width: 50px;">save</button>
+                            <button class="notebutton" onclick="toggleLinkMenu()" style="width: 60px;">cancel</button>
+                        </div>
+                        <div style="margin-top: 15px; font-size: 11px; color: #555;">
+                            * right-click any link to delete it
+                        </div>
                     </div>
                 </div>
 
@@ -52,7 +65,7 @@
                 <div class="main" id="main2">
                 <iframe 
                     id="player" 
-                    src="https://www.youtube.com/embed/JePLWGD2uW8" 
+                    src="https://www.youtube.com/embed/Tj5C0b5Dqng"
                     frameborder="0" 
                     allow="autoplay; encrypted-media" 
                     allowfullscreen>
@@ -101,6 +114,7 @@
     <script src="js/buttons.js"></script>
     <script src="js/notes.js"></script>
     <script src="js/weather.js"></script>
+    <script src="js/links.js"></script>
     <script>
     window.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.search input[name="q"]').focus();
