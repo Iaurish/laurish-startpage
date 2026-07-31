@@ -1,3 +1,4 @@
+const weatherDisplayEl = document.getElementById('weather-display');
 const weatherIconEl = document.getElementById('weather-icon');
 const weatherTempEl = document.getElementById('weather-temp');
 const weatherDescEl = document.getElementById('weather-desc');
@@ -15,7 +16,7 @@ function getWeatherSymbol(code) {
     return { icon: '[?]', desc: 'unknown' };
 }
 
-async function fetchWeather(lat, lon) {
+async function fetchWeather(lat, lon, cityName = null) {
     try {
         const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true`);
         const data = await res.json();
@@ -25,7 +26,23 @@ async function fetchWeather(lat, lon) {
         weatherIconEl.innerText = symbol.icon;
         weatherTempEl.innerText = current.temperature + '°C';
         weatherDescEl.innerText = symbol.desc;
+        
+        if (!cityName) {
+            try {
+                const geoRes = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`);
+                const geoData = await geoRes.json();
+                cityName = geoData.city || geoData.locality || "Unknown Location";
+                localStorage.setItem('weather_city', cityName);
+            } catch (e) {
+                cityName = "Current Location";
+            }
+        }
+        
+        weatherDisplayEl.title = `location: ${cityName.toLowerCase()}`;
+        
+        weatherDisplayEl.style.display = 'block';
         locationInputContainer.style.display = 'none';
+        
     } catch (e) {
         weatherTempEl.innerText = 'error';
     }
@@ -33,17 +50,25 @@ async function fetchWeather(lat, lon) {
 
 async function geocodeAndFetch(city) {
     try {
+        weatherDisplayEl.style.display = 'block';
+        locationInputContainer.style.display = 'none';
+        weatherIconEl.innerText = '';
         weatherTempEl.innerText = 'searching...';
+        weatherDescEl.innerText = '';
+        
         const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=1`);
         const data = await res.json();
         
         if (data.results && data.results.length > 0) {
-            const { latitude, longitude } = data.results[0];
+            const { latitude, longitude, name } = data.results[0];
             localStorage.setItem('weather_lat', latitude);
             localStorage.setItem('weather_lon', longitude);
-            fetchWeather(latitude, longitude);
+            localStorage.setItem('weather_city', name);
+            fetchWeather(latitude, longitude, name);
         } else {
-            weatherTempEl.innerText = 'not found';
+            promptManualLocation();
+            locationInput.value = '';
+            locationInput.placeholder = 'not found...';
         }
     } catch (e) {
         weatherTempEl.innerText = 'error';
@@ -51,26 +76,36 @@ async function geocodeAndFetch(city) {
 }
 
 function promptManualLocation() {
-    weatherIconEl.innerText = '';
-    weatherTempEl.innerText = '';
-    weatherDescEl.innerText = '';
+    weatherDisplayEl.style.display = 'none';
     locationInputContainer.style.display = 'flex';
+    locationInput.value = '';
+    locationInput.placeholder = 'enter city...';
     locationInput.focus();
 }
 
-// Listen for the "Enter" key on the manual input box
 locationInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
-        geocodeAndFetch(this.value);
+        if (this.value.trim() !== '') {
+            geocodeAndFetch(this.value.trim());
+        } else {
+            initWeather();
+        }
+    }
+});
+
+locationInput.addEventListener('blur', function () {
+    if (localStorage.getItem('weather_lat')) {
+        initWeather();
     }
 });
 
 function initWeather() {
     const savedLat = localStorage.getItem('weather_lat');
     const savedLon = localStorage.getItem('weather_lon');
+    const savedCity = localStorage.getItem('weather_city');
 
     if (savedLat && savedLon) {
-        fetchWeather(savedLat, savedLon);
+        fetchWeather(savedLat, savedLon, savedCity);
     } else {
         if ("geolocation" in navigator) {
             navigator.geolocation.getCurrentPosition(
@@ -91,4 +126,5 @@ function initWeather() {
 
 initWeather();
 
+// Automatically update the weather every 30 minutes
 setInterval(initWeather, 30 * 60 * 1000);
