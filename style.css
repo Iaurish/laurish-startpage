@@ -166,8 +166,20 @@ input:focus, textarea:focus {
 }
 
 .search { flex-grow: 2; }
-.button { min-width: 14px; cursor: pointer; }
-.button:hover { background-color: #999999 !important; }
+.button { 
+    min-width: 24px;
+    cursor: pointer; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 14px;
+    user-select: none;
+}
+
+.button:hover { 
+    background-color: #999999 !important; 
+}
 
 .quote {
     color: black;
@@ -243,7 +255,7 @@ form, input {
     position: relative;
     padding: 10px;
     margin: 0;
-    width: 150px;
+    width: 25%;
     height: 100%;
 }
 
@@ -423,4 +435,43 @@ form, input {
     #location-input {
         width: 90px;
     }
+}
+
+#changelog-btn {
+    position: absolute;
+    bottom: 15px;
+    left: 25px;
+    cursor: pointer;
+    color: black;
+}
+
+#changelog-btn:hover {
+    text-decoration: underline;
+}
+
+#changelog-menu {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #c4c4c4;
+    z-index: 30;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#changelog-text {
+    height: 150px;
+    overflow-y: auto;
+    font-size: 12px;
+    line-height: 1.5;
+    border-bottom: 1px solid #777;
+    padding-bottom: 10px;
+}
+
+#changelog-text::-webkit-scrollbar {
+    display: none;
 }
