@@ -17,6 +17,7 @@ function renderLinks() {
     document.getElementById('link-col-1').innerHTML = '';
     document.getElementById('link-col-2').innerHTML = '';
     document.getElementById('link-col-3').innerHTML = '';
+    document.getElementById('link-col-4').innerHTML = '';
 
     userLinks.forEach((link, index) => {
         const a = document.createElement('a');
@@ -24,15 +25,16 @@ function renderLinks() {
         a.innerText = link.name;
         
         a.oncontextmenu = function(e) {
-            e.preventDefault();
+            e.preventDefault(); 
             if(confirm(`Delete link: ${link.name}?`)) {
-                userLinks.splice(index, 1);
-                localStorage.setItem('custom_links', JSON.stringify(userLinks)); // Save changes
-                renderLinks();
+                userLinks.splice(index, 1); 
+                localStorage.setItem('custom_links', JSON.stringify(userLinks)); 
+                renderLinks(); 
             }
         };
         
-        document.getElementById(`link-col-${link.col}`).appendChild(a);
+        const colEl = document.getElementById(`link-col-${link.col}`);
+        if (colEl) colEl.appendChild(a);
     });
 }
 
@@ -69,3 +71,16 @@ function saveNewLink() {
 }
 
 renderLinks();
+
+function toggleChangelog() {
+    const linkMenu = document.getElementById('link-menu');
+    const changelogMenu = document.getElementById('changelog-menu');
+    
+    if (changelogMenu.style.display === 'none') {
+        linkMenu.style.display = 'none';
+        changelogMenu.style.display = 'flex';
+    } else {
+        changelogMenu.style.display = 'none';
+        linkMenu.style.display = 'flex';
+    }
+}
