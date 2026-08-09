@@ -475,3 +475,17 @@ form, input {
 #changelog-text::-webkit-scrollbar {
     display: none;
 }
+
+.project-link {
+    text-decoration: none;
+    color: black;
+    border: 1px solid #777;
+    padding: 10px;
+    display: block;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.project-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    border-color: #111;
+}

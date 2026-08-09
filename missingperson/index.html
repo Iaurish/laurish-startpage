@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Missing...</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="enter-screen" onclick="startExperience()">
+        <p>[ click to uncover the truth ]</p>
+    </div>
+
+    <audio id="creepy-audio" loop>
+        <source src="audio/creepy.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="forest-bg"></div>
+
+    <div id="newspaper-container">
+        
+        <div class="newspaper paper-1">
+            <h2>Three people missing in woods</h2>
+            <div class="news-body">
+                <img src="img/news1.png" alt="News Image">
+                <div class="fake-text">
+                    <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newspaper paper-2">
+            <h2>Where is the body?</h2>
+            <div class="news-body">
+                <img src="img/news2.png" alt="News Image">
+                <div class="fake-text">
+                    <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newspaper paper-3">
+            <h2>Alleged Killer Snaps When Questioned</h2>
+            <div class="news-body">
+                <img src="img/news3.png" alt="News Image">
+                <div class="fake-text">
+                    <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="newspaper paper-4">
+            <h2>New DNA Evidence Found</h2>
+            <div class="news-body">
+                <img src="img/news4.png" alt="News Image">
+                <div class="fake-text">
+                    <div class="line"></div><div class="line"></div><div class="line"></div><div class="line"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <img id="suspect-img" src="img/bundy.png" alt="Suspect">
+    <script>
+        function startExperience() {
+            const audio = document.getElementById('creepy-audio');
+            audio.volume = 0.5;
+            audio.play();
+
+            const overlay = document.getElementById('enter-screen');
+            overlay.style.opacity = '0';
+            
+            setTimeout(() => { 
+                overlay.style.display = 'none'; 
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
