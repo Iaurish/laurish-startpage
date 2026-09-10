@@ -17,6 +17,11 @@
     font-style: normal;
 }
 
+:root {
+    --bg-image: url('img/background1.jpg');
+    --accent-color: rgb(71, 89, 167);
+}
+
 ::-webkit-scrollbar {
     width: 0;
 }
@@ -43,7 +48,7 @@ body {
     
     background-image: 
         linear-gradient(rgba(17, 17, 17, 0.2), rgba(17, 17, 17, 0.2)),
-        url('img/background1.jpg');
+        var(--bg-image);
         
     background-size: cover; 
     background-position: center center; 
@@ -142,8 +147,8 @@ input:focus, textarea:focus {
     align-items: center;
 }
 
-.container-top::after { content: "welcome home."; }
-.container-top:hover::after { content: 'お帰りなさい'; }
+.container-top::after { content: attr(data-text); }
+.container-top:hover::after { content: attr(data-hover); }
 
 .container-middle {
     height: 90%;
@@ -199,7 +204,7 @@ form, input {
 
 .accent {
     position: relative;
-    background-color: rgb(71, 89, 167);
+    background-color: var(--accent-color);
     height: 2px;
 }
 
@@ -378,51 +383,77 @@ form, input {
 /* MOBILE STUFF */
 
 @media (max-width: 880px) {
+    /* 1. Apply the 95% width to all three elements */
     .container, .accent#division, .notes {
         width: 95%;
         min-width: 0;
+    }
+
+    /* 2. Apply the tall height to the main container */
+    .container {
+        height: 80vh; 
+        min-height: 450px; 
+    }
+
+    /* 3. Keep the blue line thin, and the notes box normal height */
+    .accent#division {
+        height: 2px;
+    }
+    .notes {
         height: auto;
     }
 
+    /* 4. FIX: Set height to 90% so it doesn't push the bottom bar out of the box! */
     .container-middle {
-        flex-direction: column;
+        flex-direction: row; 
+        height: 90%; 
     }
 
     .main {
-        width: 100%;
+        width: 65%;
         min-width: 0;
-        flex-direction: column;
-        align-items: center;
-        height: auto;
-        padding-bottom: 20px;
+        flex-direction: column; 
+        align-items: flex-start;
+        overflow-y: auto; 
+        padding: 10px;
     }
 
     .sidebar {
+        width: 35%;
+        height: 100%;
+    }
+
+    .section {
         width: 100%;
-        height: 150px;
+        padding: 5px 0;
+        margin-bottom: 15px;
+        text-align: left;
     }
 
     #player {
         min-width: 0;
         width: 100%;
-        height: 250px;
+        height: 100%;
     }
 
-    .section {
-        width: 90%;
-        padding: 5px;
-    }
-
+    /* 5. Keep the bottom bar on a single line */
     .container-bottom {
-        height: auto;
-        flex-wrap: wrap;
-        padding-bottom: 5px;
+        height: 14px;
+        flex-wrap: nowrap;
+        padding-bottom: 0;
     }
-    .quote {
-        width: 100%;
-        margin-top: 5px;
+    
+    .search {
+        flex-basis: auto;
+        margin-top: 0;
     }
 
+    /* 6. Hide the quote/waifu text entirely on mobile to save space */
+    .quote {
+        display: none !important;
+    }
+
+    /* 7. Shrink weather and time so they don't overlap */
     .time { right: 10px; top: 5px; }
     .weather { left: 10px; top: 5px; }
     
@@ -488,4 +519,21 @@ form, input {
 .project-link:hover {
     background-color: rgba(0, 0, 0, 0.05);
     border-color: #111;
+}
+
+.global-music-btn {
+    font-family: "haxrcorp", monospace;
+    font-size: 24px;
+    position: fixed; /* Keeps it in the corner even if you scroll */
+    bottom: 10px;
+    right: 25px;
+    z-index: 9999;
+    cursor: pointer;
+    user-select: none;
+    color: white;
+    transition: color 0.2s ease;
+}
+
+.global-music-btn:hover {
+    text-decoration: underline;
 }
