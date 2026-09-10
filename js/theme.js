@@ -47,8 +47,8 @@ const ACTIVE_THEME = 'eosd';
 
 function applyTheme() {
     const theme = THEMES[ACTIVE_THEME];
-    
-    document.documentElement.style.setProperty('--bg-image', `url('${theme.bg}')`);
+
+    document.documentElement.style.setProperty('--bg-image', `url('${theme.bg}?v=1.1')`);
     document.documentElement.style.setProperty('--accent-color', theme.accent);
     
     const topContainer = document.querySelector('.container-top');
