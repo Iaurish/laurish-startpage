@@ -42,7 +42,7 @@ const THEMES = {
 };
 
 // change theme here
-const ACTIVE_THEME = 'eosd'; 
+const ACTIVE_THEME = 'default'; 
 // ==========================================
 
 function applyTheme() {
